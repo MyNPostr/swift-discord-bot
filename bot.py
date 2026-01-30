@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 import asyncio
@@ -19,6 +20,7 @@ DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "minecraft")
 
+logging.basicConfig(level=logging.INFO)
 if not DISCORD_TOKEN:
     raise RuntimeError("DISCORD_TOKEN is missing")
 
