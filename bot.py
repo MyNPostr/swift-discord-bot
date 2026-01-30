@@ -46,20 +46,27 @@ def team_display(team: str | None, display_raw: str | None) -> str:
         clean = strip_mc_colors(display_raw)
         return clean if clean else team
     return team
-
-
+    
 @client.event
 async def on_ready():
-    await db.connect()
+    print("READY: bot connected to Discord")
+    try:
+        await asyncio.wait_for(db.connect(), timeout=10)
+        print("READY: db connected")
+    except Exception as e:
+        print("READY: db connect FAILED:", repr(e))
+        return
 
     guild = discord.Object(id=GUILD_ID) if GUILD_ID else None
     if guild:
         tree.copy_global_to(guild=guild)
         await tree.sync(guild=guild)
+        print("READY: commands synced to guild", GUILD_ID)
     else:
         await tree.sync()
+        print("READY: commands synced globally")
 
-    print(f"Запущен бот от {client.user}")
+    print(f"✅ Logged in as {client.user}")
 
 
 @tree.command(name="player", description="Информация об игроке по нику")
