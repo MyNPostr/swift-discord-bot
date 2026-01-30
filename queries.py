@@ -7,7 +7,7 @@ FROM luckperms_group_permissions g
 JOIN (
     SELECT name, MAX(id) AS mid
     FROM luckperms_group_permissions
-    WHERE permission LIKE 'displayname.%'
+    WHERE permission LIKE 'displayname.%%'
     GROUP BY name
 ) m ON m.name = g.name AND m.mid = g.id;
 """
