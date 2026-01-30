@@ -89,7 +89,7 @@ async def player_cmd(interaction: discord.Interaction, name: str):
     emb.add_field(name="Убийств: ", value=str(kills), inline=True)
 
     skin_url = f"https://mc-heads.net/body/{row.get('name')}/200"
-    emb.set_thumbnail(url=skin_url)
+    emb.set_image(url=skin_url)
 
     if updated_at is not None:
         emb.add_field(name="Updated", value=str(updated_at), inline=True)
